@@ -54,12 +54,26 @@ def dataPlot(data):
 
 
 #---------------------------------second PART-----------Growth rate by temperature--------------------------------------
+    try:
+        plt.scatter(type_1[:,0],  type_1[:,1], color='g', s=25, marker="*", label="Salmonella enterica" )
+    except:
+        print("error1")
 
-    plt.scatter(type_1[:,0], type_1[:,1], label="Salmonella enterica", color='g', s=25, marker="*" )
+    try:
 
-    plt.scatter(type_2[:, 0], type_2[:, 1], color='r', s=25, marker="x", label="Bacillus cereus")
-    plt.scatter(type_3[:, 0], type_3[:, 1], color='b', s=25, marker="^", label="Listeria")
-    plt.scatter(type_4[:, 0], type_4[:, 1], color='y', s=25, marker="o", label="Brochothrix thermosphacta")
+        plt.scatter(type_2[:, 0], type_2[:, 1], color='r', s=25, marker="x", label="Bacillus cereus")
+    except:
+        print("error2")
+    try:
+        plt.scatter(type_3[:, 0], type_3[:, 1], color='b', s=25, marker="^", label="Listeria")
+    except:
+        print("error3")
+    try:
+        plt.scatter(type_4[:, 0], type_4[:, 1], color='y', s=25, marker="o", label="Brochothrix thermosphacta")
+    except:
+        print("error4")
+
+
 
 
 
