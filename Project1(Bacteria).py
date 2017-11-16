@@ -40,7 +40,7 @@ def main():
 
     while not button=='quit':
 
-        print(" L for loading data---- F for filter data----D for Display Statistic----- G for Generating plots")
+        print(" L for loading data---- F for filter data----D for Display Statistic----- G for Generating plots------Q for quitting the program")
         button = input("What would you like to do? \n>>")
 
 
@@ -55,22 +55,22 @@ def main():
 
             while True:
 
-                if bacteria_filter != 1 and bacteria_filter != 2 and bacteria_filter != 3 and bacteria_filter != 4:
-                    print("No filter is on for bacteria type")
+                if bacteria_filter != 1 and bacteria_filter != 2 and bacteria_filter != 3 and bacteria_filter != 4 and growthRatefilter[0]==0 and growthRatefilter[1]==float('inf'):
                     print("--------------------------------------------------------------------")
+                    print("No filter is on")
+
                 elif bacteria_filter ==None:
                     print("bacteria type {} is on".format(bacteria_filter))
                     print("--------------------------------------------------------------------")
                 # This is the part where we show the filter settings for growth rate
-                if growthRatefilter[0]==0 and growthRatefilter[1]==float('inf'):
-                    print("No filter is on for growth rate")
+
 
 
 
 
                 filter_option = input("for filtering bacteria type please Press 1 "
                                       "\nfor filtering growth rate please Press 2\n"
-                                      "Type q to quitting filter\n>>")
+                                      "Type q to return the main menu\n>>")
                 if filter_option=="1":
                     bacteria_filter = int(input("Which Bacteria type do you want to get? \n\n1 for Salmonella "
                                       "\n2 for Bacillus cereus"
@@ -124,13 +124,16 @@ def main():
 
         elif button=="G":
             dataPlot(ongoing_data)
-        else:
-            print("Not a valid input please choose L or G or D or F")
+        elif button == "Q":
+            break
+
         #This is the part where we show the filter settings
         if bacteria_filter != 1 and bacteria_filter != 2 and bacteria_filter != 3 and bacteria_filter != 4 :
-            print("No filter is on")
+            print("No bacteria filter is on")
         elif True:
             print("bacteria type {} is on".format(bacteria_filter))
+        else:
+            print("Not a valid input please choose L or G or D or F")
 
 
 
