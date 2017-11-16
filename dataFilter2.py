@@ -21,4 +21,3 @@ def dataFilter2(data, bacteriaFilter, growthRatefilter):
 
 
     return data[logical_vector,:]
-

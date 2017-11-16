@@ -3,7 +3,7 @@ import math
 import decimal
 import time
 import matplotlib.pyplot as plt
-
+from dataLoad import *
 
 
 def dataPlot(data):
@@ -54,6 +54,9 @@ def dataPlot(data):
 
 
 #---------------------------------second PART-----------Growth rate by temperature--------------------------------------
+
+    plt.figure(1)
+
     try:
         plt.scatter(type_1[:,0],  type_1[:,1], color='g', s=25, marker="*", label="Salmonella enterica" )
     except:

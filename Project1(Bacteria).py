@@ -1,3 +1,4 @@
+
 import numpy as np
 import math
 import decimal
@@ -9,37 +10,62 @@ from dataLoad import *
 from dataFilter2 import *
 
 
-def main():
-    data =None
-    def load():
-        data=[]
-        filename = input("The name of the file name is necessary(with correct extension) :\n>>")
-        try:
-            data = dataLoad(filename)
-        except:
-            print("ERROR: Invalid filename or extension\n it should end with \" .txt \"")
-            time.sleep(2)
-        return data
 
+def load():
+    data = []
+    filename = input("The name of the file name is necessary(with correct extension) :\n>>")
+
+    try:
+        data = dataLoad(filename)
+        print(data)
+    except:
+
+        print("ERROR: Invalid filename or extension\n it should end with \" .txt \"")
+
+        time.sleep(2)
+    return data
+
+
+
+
+def main():
     ongoing_data = []
     button = ''
     filter_situation = "off"
+    bacteria_filter = None
+    growthRatefilter = [0, float('inf')]
+    data=[]
+
+
 
     while not button=='quit':
 
         print(" L for loading data---- F for filter data----D for Display Statistic----- G for Generating plots")
         button = input("What would you like to do? \n>>")
 
-        if data==None and np.any(button==np.array(["G","D","F"])):
-            print("You need to load data first")
+
+        if (np.any(button == np.array(["F", "G", "D"]))) and ongoing_data==[]:
+            print("You gotta load data ")
 
         elif button=="L":
             ongoing_data= load()
+            data=ongoing_data*1
 
         elif button=="F":
-            bacteria_filter =0
-            growthRatefilter = [0, 1]
+
             while True:
+
+                if bacteria_filter != 1 and bacteria_filter != 2 and bacteria_filter != 3 and bacteria_filter != 4:
+                    print("No filter is on for bacteria type")
+                    print("--------------------------------------------------------------------")
+                elif bacteria_filter ==None:
+                    print("bacteria type {} is on".format(bacteria_filter))
+                    print("--------------------------------------------------------------------")
+                # This is the part where we show the filter settings for growth rate
+                if growthRatefilter[0]==0 and growthRatefilter[1]==float('inf'):
+                    print("No filter is on for growth rate")
+
+
 
 
                 filter_option = input("for filtering bacteria type please Press 1 "
@@ -53,11 +79,25 @@ def main():
                 elif filter_option =="2":
                     growthRatefilter[0]= float(input("Type the lower bound of the interval"))
                     growthRatefilter[1]= float(input("Type the upper bound of the interval"))
+
+
+
                 elif filter_option=="q":
                     break
+                # This is the part where we show the filter settings
+                if bacteria_filter != 1 and bacteria_filter != 2 and bacteria_filter != 3 and bacteria_filter != 4:
+                    print("No filter is on for bacteria type")
+                elif True:
+                    print("bacteria type {} is on".format(bacteria_filter))
+                # This is the part where we show the filter settings for growth rate
+                if growthRatefilter[0]==-0.1 and growthRatefilter[1]==float('inf'):
+                    print("No filter is on for growth rate")
+                elif True:
+                    print("growth rate filter is on from {} to {}  ".format(growthRatefilter[0],growthRatefilter[1]))
 
 
-            ongoing_data= dataFilter2(ongoing_data,bacteria_filter,growthRatefilter)
+
+            ongoing_data= dataFilter2(data,bacteria_filter,growthRatefilter)
 
         elif button=="D" :
 
@@ -65,7 +105,7 @@ def main():
                                "1 for Mean growth rate\n"
                                "2 for Std Temperature\n"
                                "3 for std Growth Rate\n"
-                               "4 for num ber of rows\n"
+                               "4 for number of rows\n"
                                "5 for mean cold growth rate\n"
                                "6 for mean hot growth rate\n>>")
 
@@ -84,6 +124,14 @@ def main():
 
         elif button=="G":
             dataPlot(ongoing_data)
+        else:
+            print("Not a valid input please choose L or G or D or F")
+        #This is the part where we show the filter settings
+        if bacteria_filter != 1 and bacteria_filter != 2 and bacteria_filter != 3 and bacteria_filter != 4 :
+            print("No filter is on")
+        elif True:
+            print("bacteria type {} is on".format(bacteria_filter))
+
 
 
 
