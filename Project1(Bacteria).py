@@ -35,7 +35,7 @@ def main():
     bacteria_filter = None
     growthRatefilter = [0, float('inf')]
     data=[]
-
+    data2=[]
 
 
     while not button=='quit':
@@ -50,6 +50,7 @@ def main():
         elif button=="L":
             ongoing_data= load()
             data=ongoing_data*1
+            data2=data*1
 
         elif button=="F":
 
@@ -70,17 +71,26 @@ def main():
 
                 filter_option = input("for filtering bacteria type please Press 1 "
                                       "\nfor filtering growth rate please Press 2\n"
+                                        "for resetting the data to the raw data please Press 3\n"
                                       "Type q to return the main menu\n>>")
                 if filter_option=="1":
-                    bacteria_filter = int(input("Which Bacteria type do you want to get? \n\n1 for Salmonella "
+                    try:
+                        bacteria_filter = int(input("Which Bacteria type do you want to get? \n\n1 for Salmonella "
                                       "\n2 for Bacillus cereus"
                                       "\n3 for Listeria"
                                       "\n4 for Brochothrix thermosphacta\n>>"))
+                    except:
+                        print("You need to type in a valid bacteria type!")
                 elif filter_option =="2":
                     growthRatefilter[0]= float(input("Type the lower bound of the interval"))
                     growthRatefilter[1]= float(input("Type the upper bound of the interval"))
 
+                elif filter_option == "3":
+                    bacteria_filter = None
+                    growthRatefilter = [0, float('inf')]
+                    ongoing_data = dataFilter2(data, bacteria_filter, growthRatefilter)
 
+                    print("Done!\n")
 
                 elif filter_option=="q":
                     break
